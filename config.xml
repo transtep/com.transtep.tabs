@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="com.transtep.tabs" version="0.0.1">
+	<name>shelf</name>
+	<category>龍雲數位</category>
+	<description>a sample IVM Plugin.</description>
+	<author email="xxkuo@transtep.com" href="http://www.transtep.com">Transtep RD Team</author>
+	<serviceurl href="assets://index.html" />
+	<preference name="position" value="0,700,1080,85" /><!-- ifarme 位置 大小 -->
+	<preference name="bgcolor" value="transparent" /><!-- ifarme 背景顏色 -->
+	<preference name="fullscreen" value="false" /><!-- ifarme 是否填滿頁面 -->
+	<preference name="opacity" value="1" /><!-- ifarme 是否透明 -->
+	<preference name="display" value="true" /><!-- ifarme 是否顯示 -->
+	<preference name="z-index" value="2" />
+	<feature name="data" value="feature.transtep.data"/>
+</plugin>
