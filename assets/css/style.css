@@ -11,40 +11,42 @@ html, body, a, span {
 body {
 	padding-left: 12px;
 }
-#tabs {
-	width: 190px;
-	display: flex;
-	flex-flow: row wrap;
-}
-a {
-	width: 180px;
-	height: 180px;
-	margin: 5px;
-	text-decoration: none;
-	background: #eee;
-	border-radius:60px;
-	position: relative;
-}
-img {
-	height: 180px;
-	vertical-align: middle;
-	position: absolute;
-	z-index: 1;
-}
-span {
-	width: 100%;
-	font-size: 24px;
-	color: #1c1c1c;
-	text-align: center;
-	display: block;
-	text-shadow: 2px 2px 2px #ccc;
-	padding-top: 130px;
-	position: absolute;
-	z-index: 2;
-}
-a:not(.current) {
-	filter: gray;
-	-webkit-filter: grayscale(100%);
+@media screen and (min-width: 200px) {
+	#tabs {
+		width: 190px;
+		display: flex;
+		flex-flow: row wrap;
+	}
+	a {
+		width: 180px;
+		height: 180px;
+		margin: 5px;
+		text-decoration: none;
+		background: #eee;
+		border-radius:60px;
+		position: relative;
+	}
+	img {
+		height: 180px;
+		vertical-align: middle;
+		position: absolute;
+		z-index: 1;
+	}
+	span {
+		width: 100%;
+		font-size: 24px;
+		color: #1c1c1c;
+		text-align: center;
+		display: block;
+		text-shadow: 2px 2px 2px #ccc;
+		padding-top: 130px;
+		position: absolute;
+		z-index: 2;
+	}
+	a:not(.current) {
+		filter: gray;
+		-webkit-filter: grayscale(100%);
+	}
 }
 
 /* 用來實現動畫的keyframes;  從0度旋轉到360度 */

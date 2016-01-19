@@ -10,14 +10,34 @@ var options = (function() {
 	return options;
 }());
 
-var	ul = $('#tabs'),
-	current_index,
+var	container = $('#tabs'),
 	system_tabs = JSON.parse(self.data.property.client.get('tabs_settings')) || {},
 	imgpath = {
 		"飲料機": "./images/juice.png",
 		"食品機": "./images/cookie.png",
 		"全部": "./images/all.png"
-	};
+	},
+	current_index = 1e5,
+	current_element;
+
+function switchTabs(obj, index) {
+	if(current_index===index) {
+		return false;
+	}
+	current_element && current_element.removeClass('current');
+	obj.addClass('current');
+	current_element = obj;
+	current_index = index;
+
+	var shelf = ctrl.shelf;
+	if(index == 1e5) {
+		shelf.display_channel = [1, 1e5];
+	} else {
+		shelf.display_channel = [shelf.system.start_host_channel[index],
+			shelf.system.start_host_channel[index] + shelf.system.total_host_channel[index] - 1];
+	}
+	ctrl.trigger('shelf.one.show', true);
+}
 
 /* 構造函數：頁籤控制器與主控制器之間的渠道 */
 var Tabs = function() {
@@ -26,28 +46,29 @@ Tabs.prototype = {
 	constructor: Tabs,
 	/* (非必須存在)初始化：與控制器界接成功後會觸發此方法 */
 	initialize: function() {
-		ul.empty();
+		container.empty();
 		if(Object.keys(system_tabs).length) {
 			system_tabs = $.extend({1e5: {name: "全部"}}, system_tabs);
 
 			$.each(system_tabs, function(index, val) {
 				index = +index == 1e5 ? 1e5 : +index + 1;
 				$('<a href="#" class="' + (index!=1e5 ? '' : 'all current')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span><div class="rays"></div></a>')
-				.on('click mousedown', function() {
-					$('a.current').removeClass('current');
-					$(this).addClass('current');
-
-					var shelf = ctrl.shelf;
-					if(index == 1e5) {
-						shelf.display_channel = [1, 1e5];
+				.on('click mousedown', function(e) {
+					if(e.type === 'mousedown') {		//判斷戳
+						var timeStart = e.timeStamp;
+						$(this).off('mouseup').one('mouseup', function(e) {
+							if(e.timeStamp - timeStart < 4e2) {
+								switchTabs($(this), index);
+							}
+						})
 					} else {
-						shelf.display_channel = [shelf.system.start_host_channel[index],
-							shelf.system.start_host_channel[index] + shelf.system.total_host_channel[index] - 1];
+						switchTabs($(this), index);
 					}
-					ctrl.trigger('shelf.one.show', true);
 				})
-				.appendTo(ul);
+				.appendTo(container);
 			});
+
+			current_element = container.find('.current');
 		}
 		return this;
 	},
