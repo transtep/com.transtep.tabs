@@ -15,7 +15,8 @@ var	ul = $('#tabs'),
 	system_tabs = JSON.parse(self.data.property.client.get('tabs_settings')) || {},
 	imgpath = {
 		"飲料機": "./images/juice.png",
-		"食品機": "./images/cookie.png"
+		"食品機": "./images/cookie.png",
+		"全部": "./images/all.png"
 	};
 
 /* 構造函數：頁籤控制器與主控制器之間的渠道 */
