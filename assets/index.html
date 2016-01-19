@@ -3,41 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>tabs</title>
+	<link rel="stylesheet" href="./css/style.css" />
 	<script src="./js/jquery-1.11.3.min.js"></script>
 	<script src="./js/main.js"></script>
-<style type="text/css">
-#tabs {
-	width: 190px;
-	display: flex;
-	flex-flow: row wrap;
-}
-a {
-	width: 180px;
-	height: 180px;
-	margin: 5px;
-	text-decoration: none;
-	background: #eee;
-	border-radius:60px ;
-}
-img {
-	height: 180px;
-	vertical-align: middle;
-}
-span {
-	margin-top: -50px;
-	font-size: 24px;
-	color: #1c1c1c;
-	text-align: center;
-	display: block;
-	text-shadow: 2px 2px 2px #ccc;
-}
-.gray {
-	filter: gray;
-	-webkit-filter: grayscale(100%);
-}
-</style>
 </head>
 <body>
-<div id="tabs"></div>
+<div id="tabs">
+	<a href="#" class="all current "><img src="images/all.png" height="180" width="180"><span>全部</span><div class="rays"></div></a>
+</div>
+
 </body>
 </html>
