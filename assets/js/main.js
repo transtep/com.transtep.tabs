@@ -36,7 +36,7 @@ Tabs.prototype = {
 						shelf.display_channel = [shelf.system.start_host_channel[index],
 							shelf.system.start_host_channel[index] + shelf.system.total_host_channel[index] - 1];
 					}
-					ctrl.trigger('shelf.one.show');
+					ctrl.trigger('shelf.one.show', true);
 				})
 				.appendTo(ul);
 			});
