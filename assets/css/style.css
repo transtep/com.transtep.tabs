@@ -42,7 +42,7 @@ span {
 	position: absolute;
 	z-index: 2;
 }
-.gray {
+a:not(.current) {
 	filter: gray;
 	-webkit-filter: grayscale(100%);
 }

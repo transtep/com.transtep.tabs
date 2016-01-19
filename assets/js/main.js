@@ -32,10 +32,10 @@ Tabs.prototype = {
 
 			$.each(system_tabs, function(index, val) {
 				index = +index == 1e5 ? 1e5 : +index + 1;
-				$('<a href="#" class="' + (index!=1e5 ? 'gray' : 'all current')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span><div class="rays"></div></a>')
+				$('<a href="#" class="' + (index!=1e5 ? '' : 'all current')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span><div class="rays"></div></a>')
 				.on('click mousedown', function() {
-					$('a.current').addClass('gray').removeClass('current');
-					$(this).removeClass('gray').addClass('current');
+					$('a.current').removeClass('current');
+					$(this).addClass('current');
 
 					var shelf = ctrl.shelf;
 					if(index == 1e5) {
