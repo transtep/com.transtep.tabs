@@ -5,8 +5,8 @@
 	<description>a sample IVM Plugin.</description>
 	<author email="xxkuo@transtep.com" href="http://www.transtep.com">Transtep RD Team</author>
 	<serviceurl href="assets://index.html" />
-	<preference name="position" value="0,700,150,120" /><!-- ifarme 位置 大小 -->
-	<preference name="bgcolor" value="transparent" /><!-- ifarme 背景顏色 -->
+	<preference name="position" value="0,700,215,600" /><!-- ifarme 位置 大小 -->
+	<preference name="bgcolor" value="#5CB330" /><!-- ifarme 背景顏色 -->
 	<preference name="fullscreen" value="false" /><!-- ifarme 是否填滿頁面 -->
 	<preference name="opacity" value="1" /><!-- ifarme 是否透明 -->
 	<preference name="display" value="true" /><!-- ifarme 是否顯示 -->

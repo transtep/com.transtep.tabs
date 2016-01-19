@@ -12,7 +12,11 @@ var options = (function() {
 
 var	ul = $('#tabs'),
 	current_index,
-	system_tabs = JSON.parse(self.data.property.client.get('tabs_settings')) || {};
+	system_tabs = JSON.parse(self.data.property.client.get('tabs_settings')) || {},
+	imgpath = {
+		"飲料機": "./images/juice.png",
+		"食品機": "./images/cookie.png"
+	};
 
 /* 構造函數：頁籤控制器與主控制器之間的渠道 */
 var Tabs = function() {
@@ -27,8 +31,11 @@ Tabs.prototype = {
 
 			$.each(system_tabs, function(index, val) {
 				index = +index == 1e5 ? 1e5 : +index + 1;
-				$('<li>' + val['name'] + '</li>')
-				.on('click', function() {
+				$('<a href="#" class="' + (index!=1e5 ? 'gray' : '')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span></a>')
+				.on('click mousedown', function() {
+					$('a').addClass('gray');
+					$(this).removeClass('gray');
+
 					var shelf = ctrl.shelf;
 					if(index == 1e5) {
 						shelf.display_channel = [1, 1e5];
@@ -65,3 +72,8 @@ if('exports' in self) {
 }
 });
 })(jQuery, window);
+
+//防止圖片被拖曳
+document.ondragstart = function (){
+	return false;
+};
