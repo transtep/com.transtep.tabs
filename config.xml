@@ -10,6 +10,6 @@
 	<preference name="fullscreen" value="false" /><!-- ifarme 是否填滿頁面 -->
 	<preference name="opacity" value="1" /><!-- ifarme 是否透明 -->
 	<preference name="display" value="true" /><!-- ifarme 是否顯示 -->
-	<preference name="z-index" value="2" />
+	<preference name="z-index" value="9" />
 	<feature name="data" value="feature.transtep.data"/>
 </plugin>
