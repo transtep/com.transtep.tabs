@@ -53,12 +53,17 @@ Tabs.prototype = {
 			$.each(system_tabs, function(index, val) {
 				index = +index == 1e5 ? 1e5 : +index + 1;
 				$('<a href="#" class="' + (index!=1e5 ? '' : 'all current')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span><div class="rays"></div></a>')
-				.on('click mousedown', function(e) {
-					if(e.type === 'mousedown') {		//判斷戳
-						var timeStart = e.timeStamp;
+				.on('click mousedown', function(ef) {
+					if(ef.type === 'mousedown') {		//判斷戳
 						$(this).off('mouseup').one('mouseup', function(e) {
-							if(e.timeStamp - timeStart < 4e2) {
-								switchTabs($(this), index);
+							var cost = e.timeStamp - ef.timeStamp;
+							if(cost < 5e2) {
+								var	startXY = getTouches(ef),
+									endXY = getTouches(e),
+									offset = Math.abs(startXY.y - endXY.y);
+								if(offset < 20) {
+									switchTabs($(this), index);
+								}
 							}
 						})
 					} else {
@@ -99,3 +104,28 @@ if('exports' in self) {
 document.ondragstart = function (){
 	return false;
 };
+
+function getTouches(event) {
+	if (event.touches !== undefined) {
+		return {
+			x: event.touches[0].pageX,
+			y: event.touches[0].pageY
+		};
+	}
+
+	if (event.touches === undefined) {
+		if (event.pageX !== undefined) {
+			return {
+				x: event.pageX,
+				y: event.pageY
+			};
+		}
+
+	if (event.pageX === undefined) {
+		return {
+				x: event.clientX,
+				y: event.clientY
+			};
+		}
+	}
+}
