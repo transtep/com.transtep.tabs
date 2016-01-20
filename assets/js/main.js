@@ -47,34 +47,32 @@ Tabs.prototype = {
 	/* (非必須存在)初始化：與控制器界接成功後會觸發此方法 */
 	initialize: function() {
 		container.empty();
-		if(Object.keys(system_tabs).length) {
-			system_tabs = $.extend({1e5: {name: "全部"}}, system_tabs);
+		system_tabs = $.extend({1e5: {name: "全部"}}, system_tabs);
 
-			$.each(system_tabs, function(index, val) {
-				index = +index == 1e5 ? 1e5 : +index + 1;
-				$('<a href="#" class="' + (index!=1e5 ? '' : 'all current')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span><div class="rays"></div></a>')
-				.on('click mousedown', function(ef) {
-					if(ef.type === 'mousedown') {		//判斷戳
-						$(this).off('mouseup').one('mouseup', function(e) {
-							var cost = e.timeStamp - ef.timeStamp;
-							if(cost < 5e2) {
-								var	startXY = getTouches(ef),
-									endXY = getTouches(e),
-									offset = Math.abs(startXY.y - endXY.y);
-								if(offset < 20) {
-									switchTabs($(this), index);
-								}
+		$.each(system_tabs, function(index, val) {
+			index = +index == 1e5 ? 1e5 : +index + 1;
+			$('<a href="#" class="' + (index!=1e5 ? '' : 'all current')+ '"><img src="' + ( imgpath[val['name']] ? imgpath[val['name']] : './images/none.png' ) + '"><span>' + val['name'] + '</span><div class="rays"></div></a>')
+			.on('click mousedown', function(ef) {
+				if(ef.type === 'mousedown') {		//判斷戳
+					$(this).off('mouseup').one('mouseup', function(e) {
+						var cost = e.timeStamp - ef.timeStamp;
+						if(cost < 5e2) {
+							var	startXY = getTouches(ef),
+								endXY = getTouches(e),
+								offset = Math.abs(startXY.y - endXY.y);
+							if(offset < 20) {
+								switchTabs($(this), index);
 							}
-						})
-					} else {
-						switchTabs($(this), index);
-					}
-				})
-				.appendTo(container);
-			});
+						}
+					})
+				} else {
+					switchTabs($(this), index);
+				}
+			})
+			.appendTo(container);
+		});
 
-			current_element = container.find('.current');
-		}
+		current_element = container.find('.current');
 		return this;
 	},
 	/* (必須存在)顯示： */
@@ -87,6 +85,13 @@ Tabs.prototype = {
 	}
 };
 
+if(!$.isEmptyObject(system_tabs)) {
+	setTimeout(function() {
+		self.show();
+	}, 5000)
+} else {
+	return false;
+}
 var	ctrl,
 	tabs = new Tabs();
 
