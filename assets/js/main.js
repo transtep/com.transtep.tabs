@@ -36,7 +36,7 @@ function switchTabs(obj, index) {
 		shelf.display_channel = [shelf.system.start_host_channel[index],
 			shelf.system.start_host_channel[index] + shelf.system.total_host_channel[index] - 1];
 	}
-	ctrl.trigger('shelf.one.show', true);
+	ctrl.trigger('shelf.one.show', {keep: true});		//單純切換頁籤時不刷新商品資訊
 }
 
 /* 構造函數：頁籤控制器與主控制器之間的渠道 */
@@ -87,7 +87,7 @@ Tabs.prototype = {
 
 if(!$.isEmptyObject(system_tabs)) {
 	setTimeout(function() {
-		self.show();
+		tabs.show();
 	}, 5000)
 } else {
 	return false;
@@ -105,8 +105,10 @@ if('exports' in self) {
 });
 })(jQuery, window);
 
-//防止圖片被拖曳
-document.ondragstart = function (){
+document.ondragstart = function (){	//防止被拖曳
+	return false;
+};
+document.onselectstart = function (){	//防止被反白
 	return false;
 };
 
