@@ -1,0 +1,86 @@
+/*側邊icon
+<preference name="position" value="0,700,217,722" /><!-- ifarme 位置 大小 -->
+<preference name="bgcolor" value="#5CB330" /><!-- ifarme 背景顏色 -->*/
+html, body, ul, li, span {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	overflow: hidden;
+}
+body {
+	padding-left: 12px;
+}
+
+.icon {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+}
+.飲料機 .icon {
+	background-image: url(../images/juice.png);
+}
+.食品機 .icon {
+	background-image: url(../images/cookie.png);
+}
+.全部 .icon {
+	background-image: url(../images/all.png);
+}
+
+#tabs {
+	width: 190px;
+}
+li {
+	width: 180px;
+	height: 180px;
+	margin: 5px;
+	text-decoration: none;
+	background: #eee;
+	border-radius:60px;
+	position: relative;
+	display: inline-block;
+}
+span {
+	width: 100%;
+	font-size: 24px;
+	color: #1c1c1c;
+	text-align: center;
+	display: block;
+	text-shadow: 2px 2px 2px #ccc;
+	padding-top: 130px;
+	position: absolute;
+	z-index: 2;
+}
+.area:not(.current) {
+	filter: gray;
+	-webkit-filter: grayscale(100%);
+}
+
+/* 用來實現動畫的keyframes;  從0度旋轉到360度 */
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+.area.current .rays {
+	background: url(../images/background.png) 0 0 no-repeat;
+	position: absolute;
+	width: 140%;
+	height: 140%;
+	margin: -20%;
+
+	-moz-background-size: contain;
+	-webkit-background-size: contain;
+	-o-background-size: contain;
+	background-size: contain;
+
+	/* microsoft ie */
+	animation-name: spin;
+	animation-duration: 40000ms; /* 40 seconds */
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}

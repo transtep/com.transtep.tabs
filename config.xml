@@ -5,11 +5,13 @@
 	<description>a sample IVM Plugin.</description>
 	<author email="xxkuo@transtep.com" href="http://www.transtep.com">Transtep RD Team</author>
 	<serviceurl href="assets://index.html" />
-	<preference name="position" value="0,700,217,722" /><!-- ifarme 位置 大小 -->
-	<preference name="bgcolor" value="#5CB330" /><!-- ifarme 背景顏色 -->
+	<preference name="position" value="0,705,1080,50" /><!-- ifarme 位置 大小 -->
+	<preference name="bgcolor" value="transparent" /><!-- ifarme 背景顏色 -->
 	<preference name="fullscreen" value="false" /><!-- ifarme 是否填滿頁面 -->
 	<preference name="opacity" value="1" /><!-- ifarme 是否透明 -->
 	<preference name="display" value="false" /><!-- ifarme 是否顯示 -->
 	<preference name="z-index" value="9" />
+	<preference name="tabs_style" value="./css/style201605.css" />
+	<preference name="tabs_script" value="./js/hook_base.js"/>
 	<feature name="data" value="feature.transtep.data"/>
 </plugin>

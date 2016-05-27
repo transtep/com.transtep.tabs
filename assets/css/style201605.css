@@ -1,0 +1,67 @@
+/*水平按鈕
+<preference name="position" value="0,705,1080,50" /><!-- ifarme 位置 大小 -->
+<preference name="bgcolor" value="transparent" /><!-- ifarme 背景顏色 -->*/
+html, body, ul, li, span {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	overflow: hidden;
+}
+body {
+	padding-left: 12px;
+}
+
+#tabs {
+}
+li {
+	width: 180px;
+	height: 50px;
+	margin: 0px 5px;
+	background: #eee;
+	border-radius:6px;
+	position: relative;
+	float: left;
+}
+span {
+	width: 100%;
+	height: 100%;
+	line-height: 50px;
+	font-size: 24px;
+	color: #1c1c1c;
+	text-align: center;
+	display: block;
+	text-shadow: 2px 2px 2px #ccc;
+	position: absolute;
+	z-index: 2;
+}
+.area {
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
+	top: 0;
+	position: absolute;
+}
+.current {
+	background: -webkit-linear-gradient(top, #fceabb 0%,#fccd4d 50%,#f7c547 51%,#fbdf93 100%);
+}
+
+.ripple {
+	position: absolute;
+	background: rgba(190,160,80,.3);
+	border-radius: 100%;
+	transform: scale(0);
+	pointer-events: none;
+}
+.ripple.show {
+	animation: ripple .65s ease-out;
+}
+@keyframes ripple {
+	to {
+		transform: scale(2);
+		opacity: 0;
+	}
+}
