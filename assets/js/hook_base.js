@@ -22,31 +22,46 @@ $.fn.switchTabs = function (index) {
 
 	var ctrl = self.ctrl,
 		shelf = ctrl.shelf;
-	if(index == 1e5) {
+	/*if(index == 1e5) {
 		shelf.display_channel = [1, 1e5];
 	} else {
 		shelf.display_channel = [shelf.system.start_host_channel[index],
 			shelf.system.start_host_channel[index] + shelf.system.total_host_channel[index] - 1];
-	}
-	 ctrl.trigger('shelf.one.show', {lock: true});		//單純切換頁籤時不刷新商品資訊
+	}*/
+	shelf.display_channel = [shelf.system.start_host_channel[index],
+		shelf.system.start_host_channel[index] + shelf.system.total_host_channel[index] - 1];
+	ctrl.trigger('shelf.one.show', {lock: true});		//單純切換頁籤時不刷新商品資訊
 }
 
 /**
  * 鉤子載入成功觸發
  */
 self.hook_init = function() {
-	self.tabs.show();
-	container = $('#tabs').empty();
+	var ctrl = self.ctrl;
+	ctrl.on('tabs.update', function() {
+		var i = 0, show_tab = [];
+		for(i; i < ctrl.shelf.system.total_host; i++) {
+			if(tabs_settings[i]) {
+				show_tab.push(tabs_settings[i]);
+			}
+		}
 
-	tabs_settings = $.extend({1e5: {name: "全部"}}, tabs_settings);
+		if((show_tab.length || 0) < 2) {
+			return false;
+		}
+		self.tabs.show();
+		container = $('#tabs').empty();
+		//tabs_settings = $.extend({1e5: {name: "全部"}}, tabs_settings);
 
-	$.each(tabs_settings, function(index, val) {
-		index = +index == 1e5 ? 1e5 : +index + 1;
-		$('<li></li>').append($('<div class="area '+val['name']+' ' + (index!=1e5 ? '' : 'all current')+ '"><div class="icon"></div><span>' + val['name'] + '</span><div class="rays"></div></div>').on('mousedown touchstart', hook('onclick', index)))
-		.appendTo(container);
-	});
+		for(i = 0; i < show_tab.length; i++) {
+			//index = +index == 1e5 ? 1e5 : +index + 1;
+			//+' ' + (index!=1e5 ? '' : 'all current')
+			$('<li></li>').append($('<div class="area ' + show_tab[i]['name'] + '"><div class="icon"></div><span>' + show_tab[i]['name'] + '</span><div class="rays"></div></div>').on('mousedown touchstart', hook('onclick', i + 1)))
+			.appendTo(container);
+		};
 
-	current_element = container.find('.current');
+		$('.'+show_tab[0]['name']).trigger('mousedown');
+	}).trigger('tabs.update');
 }
 
 /**
